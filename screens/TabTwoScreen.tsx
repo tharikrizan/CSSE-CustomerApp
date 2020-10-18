@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, StyleSheet, TextInput } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 import { Button } from "native-base";
 
 import { Text, View } from "../components/Themed";
+import { TextInput } from "react-native-gesture-handler";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default function TabTwoScreen() {
   const [creditCard, setCreditCard] = useState("");
@@ -16,9 +18,12 @@ export default function TabTwoScreen() {
     if (creditCard !== "" && cvc !== "" && amount > 0) {
       setBalance((prev) => prev + amount);
     }
+    setCreditCard("");
+    setAmount(0);
+    setcvc("");
   };
   return (
-    <ScrollView>
+    <KeyboardAwareScrollView>
       <View style={styles.container}>
         <Text style={styles.subTitle}>Balance </Text>
         <View
@@ -51,10 +56,11 @@ export default function TabTwoScreen() {
             borderColor: "gray",
             borderWidth: 1,
             alignSelf: "stretch",
-            color: "white",
+            color: "black",
           }}
           onChangeText={(text) => setCreditCard(text)}
           value={creditCard}
+          keyboardType="number-pad"
         />
         <View
           style={styles.separator}
@@ -68,10 +74,11 @@ export default function TabTwoScreen() {
             borderColor: "gray",
             borderWidth: 1,
             alignSelf: "stretch",
-            color: "white",
+            color: "black",
           }}
           onChangeText={(text) => setcvc(text)}
           value={cvc}
+          keyboardType="number-pad"
         />
         <View
           style={styles.separator}
@@ -85,8 +92,9 @@ export default function TabTwoScreen() {
             borderColor: "gray",
             borderWidth: 1,
             alignSelf: "stretch",
-            color: "white",
+            color: "black",
           }}
+          keyboardType="number-pad"
           onChangeText={(text) => setAmount(+text)}
           value={amount.toString()}
         />
@@ -96,7 +104,7 @@ export default function TabTwoScreen() {
           darkColor="rgba(255,255,255,0.1)"
         />
       </View>
-      <Button full success>
+      <Button onPress={handleSubmit} full success>
         <Text>Submit</Text>
       </Button>
       <View
@@ -109,7 +117,7 @@ export default function TabTwoScreen() {
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
       />
-    </ScrollView>
+    </KeyboardAwareScrollView>
   );
 }
 

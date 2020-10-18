@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { ScrollView, StyleSheet } from "react-native";
-import {
-  Button,
-} from "native-base";
-
+import { Button } from "native-base";
 
 import { Text, View } from "../components/Themed";
 import { TextInput } from "react-native-gesture-handler";
-
-
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default function TabThreeScreen() {
   const [firstName, setFirstName] = useState("");
@@ -16,7 +12,7 @@ export default function TabThreeScreen() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   return (
-    <ScrollView>
+    <KeyboardAwareScrollView>
       <View style={styles.container}>
         <Text style={styles.subTitle}>PROFILE </Text>
         <View
@@ -24,9 +20,7 @@ export default function TabThreeScreen() {
           lightColor="#eee"
           darkColor="rgba(255,255,255,0.1)"
         />
- 
 
-     
         <Text style={styles.topUP}>Edit Details</Text>
         <View
           style={styles.separator}
@@ -73,6 +67,7 @@ export default function TabThreeScreen() {
             borderWidth: 1,
             alignSelf: "stretch",
           }}
+          keyboardType="number-pad"
           onChangeText={(text) => setPhoneNumber(text)}
           value={phoneNumber}
         />
@@ -111,7 +106,7 @@ export default function TabThreeScreen() {
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
       />
-    </ScrollView>
+    </KeyboardAwareScrollView>
   );
 }
 

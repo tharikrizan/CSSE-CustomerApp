@@ -15,6 +15,7 @@ import {
   Button,
   Spinner,
   View,
+  Toast,
 } from "native-base";
 
 import { bookings as DBbookings } from "../../database";
@@ -44,12 +45,36 @@ const QRCodes = () => {
     setShowQRcode(true);
   };
 
+  const getBookings = async () => {
+    const unscannedBookings = await getBookingsNotScanned();
+    if (unscannedBookings !== null) {
+      setBookings(unscannedBookings);
+    } else {
+      setBookings([]);
+    }
+  };
 
+  const deleteBookingPress = async (id: number) => {
+    const result = await deleteBooking(id);
 
+    if (result) {
+      getBookings();
+      Toast.show({
+        text: "Deleted",
+        buttonText: "Okay",
+        type: "success",
+      });
+    }
+    Toast.show({
+      text: "Error",
+      buttonText: "Okay",
+      type: "danger",
+    });
+  };
   useEffect(() => {
-    setBookings(DBbookings);
+    getBookings();
     console.log(bookings);
-  });
+  },[bookings]);
 
   return (
     <Container>
@@ -70,7 +95,9 @@ const QRCodes = () => {
                   <Text>Close</Text>
                 </Button>
               </View>
-            ) : null}
+            ) : (
+              <View></View>
+            )}
           </View>
           <List>
             {bookings.map((booking, index) => (
@@ -98,7 +125,7 @@ const QRCodes = () => {
                   <Button onPress={() => viewQRCode(booking.id)} success>
                     <Text>View QR Code</Text>
                   </Button>
-                  <Button onPress={() => viewQRCode(booking.id)} danger>
+                  <Button onPress={() => deleteBookingPress(booking.id)} danger>
                     <Text>Delete </Text>
                   </Button>
                 </Right>

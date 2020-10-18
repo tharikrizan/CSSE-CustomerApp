@@ -15,12 +15,18 @@ import {
   Button,
   Spinner,
   View,
+  Toast,
 } from "native-base";
 
 import { bookings as DBbookings } from "../../database";
 import { Booking } from "../../Models/bookingInt";
-import QRCode from "react-native-qrcode-svg";
+
 import { ScrollView } from "react-native";
+import {
+  deleteBooking,
+  getBookingsNotScanned,
+  getBookingsScanned,
+} from "../../utils/bookings";
 
 const History = () => {
   let bookingObj: Booking = {
@@ -33,10 +39,37 @@ const History = () => {
   };
   const [bookings, setBookings] = useState([bookingObj]);
 
+  const getBookings = async () => {
+    const scannedBookings = await getBookingsScanned();
+    if (scannedBookings !== null) {
+      setBookings(scannedBookings);
+    } else {
+      setBookings([]);
+    }
+  };
+
+  const deleteBookingPress = async (id: number) => {
+    const result = await deleteBooking(id);
+
+    if (result) {
+      getBookings();
+      Toast.show({
+        text: "Deleted",
+        buttonText: "Okay",
+        type: "success",
+      });
+    }
+    Toast.show({
+      text: "Error",
+      buttonText: "Okay",
+      type: "danger",
+    });
+  };
+
   useEffect(() => {
-    setBookings(DBbookings);
+    getBookings();
     console.log(bookings);
-  });
+  }, [bookings]);
   return (
     <Container>
       <ScrollView>
@@ -61,7 +94,12 @@ const History = () => {
                   </Text>
                 </Body>
                 <Right>
-                  <Button danger>
+                  <Button
+                    onPress={() => {
+                      deleteBookingPress(booking.id);
+                    }}
+                    danger
+                  >
                     <Text>Delete </Text>
                   </Button>
                 </Right>
