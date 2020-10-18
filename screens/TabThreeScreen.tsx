@@ -1,94 +1,96 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, StyleSheet, TextInput } from "react-native";
-import { Button } from "native-base";
+import { ScrollView, StyleSheet } from "react-native";
+import {
+  Button,
+} from "native-base";
+
 
 import { Text, View } from "../components/Themed";
+import { TextInput } from "react-native-gesture-handler";
 
-export default function TabTwoScreen() {
-  const [creditCard, setCreditCard] = useState("");
-  const [cvc, setcvc] = useState("");
-  const [amount, setAmount] = useState(0);
-  const [balance, setBalance] = useState(346);
 
-  useEffect(() => {}, [balance]);
 
-  const handleSubmit = () => {
-    if (creditCard !== "" && cvc !== "" && amount > 0) {
-      setBalance((prev) => prev + amount);
-    }
-  };
+export default function TabThreeScreen() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <ScrollView>
       <View style={styles.container}>
-        <Text style={styles.subTitle}>Balance </Text>
+        <Text style={styles.subTitle}>PROFILE </Text>
         <View
           style={styles.separator}
           lightColor="#eee"
           darkColor="rgba(255,255,255,0.1)"
         />
-        <Text style={styles.title}>{balance}.00 </Text>
-        <View
-          style={styles.separator}
-          lightColor="#eee"
-          darkColor="rgba(255,255,255,0.1)"
-        />
+ 
 
+     
+        <Text style={styles.topUP}>Edit Details</Text>
         <View
           style={styles.separator}
           lightColor="#eee"
           darkColor="rgba(255,255,255,0.1)"
         />
-        <Text style={styles.topUP}>TOP UP CREDITS NOW</Text>
-        <View
-          style={styles.separator}
-          lightColor="#eee"
-          darkColor="rgba(255,255,255,0.1)"
-        />
-        <Text>Enter Credit Card number</Text>
+        <Text>First Name</Text>
         <TextInput
           style={{
             height: 40,
             borderColor: "gray",
             borderWidth: 1,
             alignSelf: "stretch",
-            color: "white",
           }}
-          onChangeText={(text) => setCreditCard(text)}
-          value={creditCard}
+          onChangeText={(text) => setFirstName(text)}
+          value={firstName}
         />
         <View
           style={styles.separator}
           lightColor="#eee"
           darkColor="rgba(255,255,255,0.1)"
         />
-        <Text>Enter CVC</Text>
+        <Text>Last Name</Text>
         <TextInput
           style={{
             height: 40,
             borderColor: "gray",
             borderWidth: 1,
             alignSelf: "stretch",
-            color: "white",
           }}
-          onChangeText={(text) => setcvc(text)}
-          value={cvc}
+          onChangeText={(text) => setLastName(text)}
+          value={lastName}
         />
         <View
           style={styles.separator}
           lightColor="#eee"
           darkColor="rgba(255,255,255,0.1)"
         />
-        <Text>Enter Amount</Text>
+        <Text>Phone Number</Text>
         <TextInput
           style={{
             height: 40,
             borderColor: "gray",
             borderWidth: 1,
             alignSelf: "stretch",
-            color: "white",
           }}
-          onChangeText={(text) => setAmount(+text)}
-          value={amount.toString()}
+          onChangeText={(text) => setPhoneNumber(text)}
+          value={phoneNumber}
+        />
+        <View
+          style={styles.separator}
+          lightColor="#eee"
+          darkColor="rgba(255,255,255,0.1)"
+        />
+        <Text>Password</Text>
+        <TextInput
+          style={{
+            height: 40,
+            borderColor: "gray",
+            borderWidth: 1,
+            alignSelf: "stretch",
+          }}
+          onChangeText={(text) => setPassword(text)}
+          value={password}
         />
         <View
           style={styles.separator}
@@ -97,7 +99,7 @@ export default function TabTwoScreen() {
         />
       </View>
       <Button full success>
-        <Text>Submit</Text>
+        <Text>Edit</Text>
       </Button>
       <View
         style={styles.separator}

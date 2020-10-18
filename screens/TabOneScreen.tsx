@@ -1,16 +1,30 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet , Button } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
 
-export default function TabOneScreen() {
+import { Container, Header, Tab, Tabs, TabHeading, Icon, Text } from 'native-base';
+import NewJourney from './JourneyScreens/NewJourney';
+import QRCodes from './JourneyScreens/QRCodes';
+import History from './JourneyScreens/History';
+
+export default function TabOneScreen( ) {
+  
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabOneScreen.js" />
-    </View>
+    <Container>
+    <Header hasTabs/>
+    <Tabs>
+      <Tab heading={ <TabHeading><Icon name="camera" /><Text>Travel</Text></TabHeading>}>
+        <NewJourney/>
+      </Tab>
+      <Tab heading={ <TabHeading><Text>QRCodes</Text></TabHeading>}>
+        <QRCodes/>
+      </Tab>
+      <Tab heading={ <TabHeading><Icon name="apps" /></TabHeading>}>
+        <History/>
+      </Tab>
+    </Tabs>
+  </Container>
   );
 }
 

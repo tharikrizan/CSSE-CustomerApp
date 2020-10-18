@@ -23,6 +23,8 @@
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
-    }
+    },
+    "description": "CSSE Project , Travel Booking App",
+    "githubUrl": "https://github.com/tharikrizan/CSSE-CustomerApp.git"
   }
 }
