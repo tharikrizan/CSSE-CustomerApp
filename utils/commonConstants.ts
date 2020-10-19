@@ -1,4 +1,4 @@
-const API = process.env.REACT_APP_LOCAL_BASE_SERVER_URL + "/api/"
+const API = "http://localhost:8000" + "/api/"
     
 const BOOKING_ROUTE="booking/";
 const ROUTES_ROUTE="viewRoutes/";

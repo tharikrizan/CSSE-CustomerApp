@@ -29,22 +29,14 @@ import {
 } from "../../utils/bookings";
 
 const History = () => {
-  let bookingObj: Booking = {
-    id: 1,
-    route: "Test",
-    StartHalt: "Test",
-    endHalt: "Test",
-    date: "Test",
-    scanned: false,
-  };
-  const [bookings, setBookings] = useState([bookingObj]);
+  const [bookings, setBookings] = useState<Booking[]>();
 
   const getBookings = async () => {
     const scannedBookings = await getBookingsScanned();
     if (scannedBookings !== null) {
       setBookings(scannedBookings);
     } else {
-      setBookings([]);
+      setBookings(DBbookings);
     }
   };
 
@@ -69,42 +61,43 @@ const History = () => {
   useEffect(() => {
     getBookings();
     console.log(bookings);
-  }, [bookings]);
+  }, []);
   return (
     <Container>
       <ScrollView>
         <Header />
         <Content>
           <List>
-            {bookings.map((booking, index) => (
-              <ListItem thumbnail key={index}>
-                <Left>
-                  <MaterialIcons name="done-all" size={24} color="green" />
-                </Left>
-                <Body>
-                  <Text>{booking.route}</Text>
-                  <Text note numberOfLines={1}>
-                    Start:{booking.StartHalt}
-                  </Text>
-                  <Text note numberOfLines={1}>
-                    END:{booking.endHalt}
-                  </Text>
-                  <Text note numberOfLines={1}>
-                    {booking.date}
-                  </Text>
-                </Body>
-                <Right>
-                  <Button
-                    onPress={() => {
-                      deleteBookingPress(booking.id);
-                    }}
-                    danger
-                  >
-                    <Text>Delete </Text>
-                  </Button>
-                </Right>
-              </ListItem>
-            ))}
+            {bookings &&
+              bookings.map((booking, index) => (
+                <ListItem thumbnail key={index}>
+                  <Left>
+                    <MaterialIcons name="done-all" size={24} color="green" />
+                  </Left>
+                  <Body>
+                    <Text>{booking.route}</Text>
+                    <Text note numberOfLines={1}>
+                      Start:{booking.startHalt}
+                    </Text>
+                    <Text note numberOfLines={1}>
+                      END:{booking.endHalt}
+                    </Text>
+                    <Text note numberOfLines={1}>
+                      {booking.date}
+                    </Text>
+                  </Body>
+                  <Right>
+                    <Button
+                      onPress={() => {
+                        deleteBookingPress(booking.id);
+                      }}
+                      danger
+                    >
+                      <Text>Delete </Text>
+                    </Button>
+                  </Right>
+                </ListItem>
+              ))}
           </List>
         </Content>
       </ScrollView>

@@ -1,8 +1,13 @@
 export interface Booking  {
     id:number,
     route: string,
-    StartHalt:string,
+    startHalt:string,
     endHalt: string,
     date: string,
-    scanned: boolean,
+    isScanned: boolean,
+    fair:number,
+    fname:string,
+    lname:string,
+    phone:string
 }
+

@@ -19,12 +19,16 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.tharik.csse.customer"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
     },
     "description": "CSSE Project , Travel Booking App",
-    "githubUrl": "https://github.com/tharikrizan/CSSE-CustomerApp.git"
+    "githubUrl": "https://github.com/tharikrizan/CSSE-CustomerApp.git",
+    "android": {
+      "package": "com.tharik.csse.customer"
+    }
   }
 }

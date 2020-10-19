@@ -28,16 +28,9 @@ import { Booking } from "../../Models/bookingInt";
 import QRCode from "react-native-qrcode-svg";
 import { ScrollView } from "react-native";
 const QRCodes = () => {
-  let bookingObj: Booking = {
-    id: 1,
-    route: "Test",
-    StartHalt: "Test",
-    endHalt: "Test",
-    date: "Test",
-    scanned: false,
-  };
-  const [bookings, setBookings] = useState([bookingObj]);
-  const [selectedBooking, setSelectedBooking] = useState(bookingObj);
+
+  const [bookings, setBookings] = useState<Booking[]>([]);
+  const [selectedBooking, setSelectedBooking] = useState<Booking>();
   const [showQRcode, setShowQRcode] = useState(false);
 
   const viewQRCode = (id: number) => {
@@ -48,9 +41,10 @@ const QRCodes = () => {
   const getBookings = async () => {
     const unscannedBookings = await getBookingsNotScanned();
     if (unscannedBookings !== null) {
+      console.log("unscannedBookings",unscannedBookings)
       setBookings(unscannedBookings);
     } else {
-      setBookings([]);
+     setBookings(DBbookings)
     }
   };
 
@@ -73,8 +67,8 @@ const QRCodes = () => {
   };
   useEffect(() => {
     getBookings();
-    console.log(bookings);
-  },[bookings]);
+    console.log("bookings QRcodes", bookings);
+  }, []);
 
   return (
     <Container>
@@ -82,12 +76,12 @@ const QRCodes = () => {
         <Header />
         <Content>
           <View style={{ alignSelf: "stretch", paddingBottom: 40, margin: 5 }}>
-            {showQRcode ? (
+            {showQRcode && selectedBooking ? (
               <View
                 style={{ alignSelf: "stretch", paddingBottom: 40, margin: 5 }}
               >
                 <Text>Route:{selectedBooking.route}</Text>
-                <Text>Start:{selectedBooking.StartHalt}</Text>
+                <Text>Start:{selectedBooking.startHalt}</Text>
                 <Text>End:{selectedBooking.endHalt}</Text>
                 <Text>Date:{selectedBooking.date}</Text>
                 <QRCode value={JSON.stringify(selectedBooking)} size={200} />
@@ -112,7 +106,7 @@ const QRCodes = () => {
                 <Body>
                   <Text>{booking.route}</Text>
                   <Text note numberOfLines={1}>
-                    Start:{booking.StartHalt}
+                    Start:{booking.startHalt}
                   </Text>
                   <Text note numberOfLines={1}>
                     END:{booking.endHalt}

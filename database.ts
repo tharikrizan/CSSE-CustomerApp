@@ -3,34 +3,51 @@ export let bookings = [
   {
     id:1,
     route: "matara-colombo",
-    StartHalt: "kalutara",
+    startHalt: "kalutara",
     endHalt: "colombo",
     date: getDate(),
-    scanned: false,
+    isScanned: false,
+    fair:1234,
+    fname:"tharik",
+    lname:"string",
+    phone:"string"
   },
   {
     id:2,
     route: "matara-colombo",
-    StartHalt: "kalutara",
+    startHalt: "kalutara",
     endHalt: "colombo",
     date: getDate(),
-    scanned: false,
+    
+    isScanned: false,
+    fair:1234,
+    fname:"tharik",
+    lname:"string",
+    phone:"string"
   },
   {
     id:3,
     route: "matara-colombo",
-    StartHalt: "kalutara",
+    startHalt: "kalutara",
     endHalt: "colombo",
     date: getDate(),
-    scanned: false,
+    isScanned: false,
+    fair:1234,
+    fname:"tharik",
+    lname:"string",
+    phone:"string"
   },
   {
     id:4,
     route: "matara-colombo",
-    StartHalt: "kalutara",
+    startHalt: "kalutara",
     endHalt: "colombo",
     date: getDate(),
-    scanned: false,
+    isScanned: false,
+    fair:1234,
+    fname:"tharik",
+    lname:"string",
+    phone:"string"
   },
 ];
 
